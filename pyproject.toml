@@ -1,0 +1,100 @@
+[tool.poetry]
+authors = ["Nik"]
+description = "chess"
+license = "Apache-2.0"
+name = "chess"
+repository = "https://github.com/lilacai/lilac"
+packages = [{ include = "chess" }]
+include = []                    # Include the web app assets.
+version = "0.3.9"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0"
+stockfish = "^3.28.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.4"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
+[tool.pyright]
+include = ["lilac"]
+
+[tool.ruff]
+src = ["lilac"]
+line-length = 100
+indent-width = 2
+
+# Enable Pyflakes `F`, pycodestyle "W" and `E`, "Q" quotes, "I" imports.
+fix = true
+ignore = [
+  "D105", # Missing docstring in magic method.
+  "D106", # Missing docstring in a public nested class.
+  "D107", # Missing docstring in __init__.
+  "D203", # 1 blank line required before class docstring.
+  "D204", # 1 blank line required after class docstring.
+  "D213", # Multi-line docstring summary should start at the second line.
+  "D401", # First line of docstring should be in imperative mood: "{first_line}"
+  "D407", # Missing dashed underline after section.
+]
+select = ["E", "W", "F", "Q", "I", "D"]
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+  "__pycache__",
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "venv",
+]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.11.
+target-version = "py311"
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
+
+[tool.ruff.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.per-file-ignores]
+"*_test.py" = ["D101", "D102", "D103", "D104"]
+"__init__.py" = ["D104"]
+
+[tool.ruff.pep8-naming]
+# Allow Pydantic's `@validator` decorator to trigger class method treatment.
+classmethod-decorators = ["classmethod", "pydantic.validator"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+# Consider enabling these options for more compact code.
+# split_before_named_assigns = false
